@@ -1,0 +1,562 @@
+import React, { useState, useEffect } from 'react';
+import { Star, Phone, MessageCircle, ChevronDown, MapPin, Award, Shield, CheckCircle, Clock, TreePine, Hammer, Scissors } from 'lucide-react';
+import { Button } from '../../components/MovingBorderButton';
+import LogoSlider from '../../components/LogoSlider';
+import ProjectCard, { Project } from '../../components/ProjectCard';
+
+const BothwellLandscaping: React.FC = () => {
+  const [showThankYouMessage, setShowThankYouMessage] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [openFAQ, setOpenFAQ] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (sessionStorage.getItem('bothwellLandscapingFormSubmitted')) {
+      setShowThankYouMessage(true);
+      sessionStorage.removeItem('bothwellLandscapingFormSubmitted');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const formData = new FormData(e.currentTarget);
+      formData.append('area', 'Bothwell');
+      formData.append('service', 'Landscaping');
+      
+      const response = await fetch('https://formspree.io/f/xvgqzbeo', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        sessionStorage.setItem('bothwellLandscapingFormSubmitted', 'true');
+        window.location.reload();
+      } else {
+        alert('There was an error submitting your form. Please try again.');
+      }
+    } catch (error) {
+      alert('There was an error submitting your form. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const toggleFAQ = (index: number) => {
+    setOpenFAQ(openFAQ === index ? null : index);
+  };
+
+  const bothwellProjects: Project[] = [
+    {
+      title: "Premium Garden Design",
+      before: "/Full-Landscaping-HSC-Gallery.webp",
+      after: "/landscaping-hero-hsc.webp",
+      alt: "Luxury garden transformation"
+    },
+    {
+      title: "Composite Decking Installation",
+      before: "/fencing-BEFORE-HSC-Gallery.webp",
+      after: "/Compostite-fencing-HSC-home.webp",
+      alt: "Premium composite decking installation"
+    },
+    {
+      title: "Artificial Lawn Installation",
+      before: "/Art-tirf-Before-HSC-Gallery.webp",
+      after: "/art-turf-home-projects-HSC.webp",
+      alt: "High-quality artificial turf installation"
+    },
+    {
+      title: "Luxury Garden Features",
+      after: "/garden-bed-planting-HSC.webp",
+      alt: "Premium garden design and planting"
+    }
+  ];
+
+  const whyChooseUs = [
+    {
+      icon: <Award className="w-6 h-6 text-primary-accent" />,
+      title: "Bothwell's Trusted Landscapers",
+      description: "Over 16 years creating sophisticated outdoor spaces that match Bothwell's prestigious property standards and enhance neighborhood appeal."
+    },
+    {
+      icon: <Shield className="w-6 h-6 text-primary-accent" />,
+      title: "Premium Materials & Finishes",
+      description: "We understand Bothwell homeowners expect excellence. Premium materials, meticulous attention to detail, and finishes that reflect quality."
+    },
+    {
+      icon: <CheckCircle className="w-6 h-6 text-primary-accent" />,
+      title: "Property Value Enhancement",
+      description: "Landscaping designed to complement Bothwell's upscale properties and significantly increase long-term property value."
+    },
+    {
+      icon: <Clock className="w-6 h-6 text-primary-accent" />,
+      title: "Discreet Professional Service",
+      description: "Respectful, quiet working practices that consider your neighbors. Clean sites, prompt communication, and minimal disruption."
+    }
+  ];
+
+  const faqs = [
+    {
+      question: "What makes landscaping in Bothwell different?",
+      answer: "Bothwell's prestigious properties require landscaping that matches the area's high standards. We focus on premium materials, sophisticated design, and finishes that complement the neighborhood's upscale character while enhancing property values."
+    },
+    {
+      question: "Do you understand Bothwell's planning requirements?",
+      answer: "Yes, we're familiar with South Lanarkshire planning guidelines and Bothwell's specific requirements. We can advise on any permissions needed and ensure all work complies with local regulations."
+    },
+    {
+      question: "How do you ensure minimal disruption in Bothwell?",
+      answer: "We work respectfully in residential areas with quiet equipment where possible, clean working practices, and considerate parking. We communicate with neighbors when appropriate and maintain professional standards throughout."
+    },
+    {
+      question: "What's the typical investment for Bothwell landscaping?",
+      answer: "Investment varies based on scope and materials. Premium garden transformations typically range from £8,000-£25,000+. We provide detailed, transparent quotes with no hidden costs."
+    },
+    {
+      question: "Can you match Bothwell's architectural styles?",
+      answer: "Absolutely. We design landscapes that complement Bothwell's mix of traditional and contemporary properties, ensuring your outdoor space enhances your home's architectural character."
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-primary-bg text-text-primary">
+      {/* Hero Section */}
+      <section className="relative min-h-screen overflow-hidden">
+        <div 
+          className="absolute inset-0 w-full h-full"
+          style={{
+            backgroundImage: `url('/hero-home-HSC copy.webp')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
+        >
+          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+          <div className="absolute top-4 left-4 bg-primary-accent/90 text-white px-4 py-2 rounded-lg font-semibold">
+            Serving Bothwell
+          </div>
+        </div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 min-h-screen">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh] pt-16 sm:pt-8 lg:pt-0">
+            {/* Left Column - Content */}
+            <div className="text-left mt-20 sm:mt-12 lg:mt-0">
+              <h1 className="font-body text-4xl sm:text-5xl lg:text-6xl font-light leading-relaxed mb-8 text-white tracking-wide" style={{ textShadow: '4px 4px 12px rgba(0,0,0,1), 2px 2px 6px rgba(0,0,0,0.9)' }}>
+                Landscaping in Bothwell
+                <span className="block text-2xl sm:text-3xl lg:text-4xl font-normal mt-2 text-primary-accent">
+                  Sophisticated Gardens. Exceptional Results.
+                </span>
+              </h1>
+              
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-normal mb-6 text-white leading-relaxed" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
+                Premium garden design & luxury outdoor living spaces that enhance Bothwell's finest properties.
+              </h2>
+              
+              <p className="text-lg sm:text-xl text-white mb-8 max-w-xl leading-relaxed font-light" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
+                Creating distinguished outdoor spaces for discerning Bothwell homeowners with 16+ years of trusted expertise.
+              </p>
+
+              {/* Trust Indicators */}
+              <div className="flex items-center space-x-3 mb-8 bg-black/30 backdrop-blur-sm rounded-full px-6 py-3 w-fit border border-white/20">
+                <img 
+                  src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" 
+                  alt="Google" 
+                  className="w-6 h-6"
+                />
+                <div className="flex items-center space-x-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-primary-accent text-primary-accent" />
+                  ))}
+                </div>
+                <span className="text-white font-medium">22 Google Reviews</span>
+              </div>
+            </div>
+
+            {/* Right Column - Quote Form */}
+            <div className="hidden lg:block bg-black bg-opacity-60 backdrop-blur-sm rounded-xl p-8 border border-white border-opacity-10">
+              {showThankYouMessage && (
+                <div className="mb-6 p-4 bg-green-600 text-white rounded-lg text-center">
+                  <p className="font-semibold">Thank you! Your form has been submitted.</p>
+                  <p className="text-sm mt-1">We'll respond within 24 hours.</p>
+                </div>
+              )}
+              
+              <h3 className="text-3xl font-heading font-bold text-white mb-4 text-center">
+                Get Your Free Bothwell Quote
+              </h3>
+              
+              <p className="text-gray-300 text-center mb-8">
+                Tell us about your Bothwell landscaping project
+              </p>
+              
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    className="w-full bg-white bg-opacity-10 border border-white border-opacity-20 rounded-lg px-4 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-primary-accent focus:bg-opacity-20 transition-all duration-200"
+                    placeholder="Your Name"
+                  />
+                </div>
+
+                <div>
+                  <input
+                    type="text"
+                    name="address"
+                    className="w-full bg-white bg-opacity-10 border border-white border-opacity-20 rounded-lg px-4 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-primary-accent focus:bg-opacity-20 transition-all duration-200"
+                    placeholder="Your Bothwell Address"
+                  />
+                </div>
+
+                <div>
+                  <input
+                    type="text"
+                    name="postcode"
+                    className="w-full bg-white bg-opacity-10 border border-white border-opacity-20 rounded-lg px-4 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-primary-accent focus:bg-opacity-20 transition-all duration-200"
+                    placeholder="Postcode"
+                  />
+                </div>
+
+                <div>
+                  <input
+                    type="tel"
+                    name="phone"
+                    required
+                    className="w-full bg-white bg-opacity-10 border border-white border-opacity-20 rounded-lg px-4 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-primary-accent focus:bg-opacity-20 transition-all duration-200"
+                    placeholder="Phone Number"
+                  />
+                </div>
+
+                <div>
+                  <textarea
+                    name="message"
+                    rows={4}
+                    className="w-full bg-white bg-opacity-10 border border-white border-opacity-20 rounded-lg px-4 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-primary-accent focus:bg-opacity-20 transition-all duration-200 resize-none"
+                    placeholder="Tell us about your Bothwell landscaping project..."
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-primary-accent hover:bg-hover-accent text-white font-bold py-4 px-6 rounded-lg transition-all duration-200 hover:scale-105 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? 'Submitting...' : 'Get My Free Bothwell Quote'}
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Logo Slider */}
+      <LogoSlider />
+
+      {/* Mobile Quote Form */}
+      <section className="lg:hidden bg-secondary-bg py-16 px-4">
+        <div className="max-w-lg mx-auto">
+          <div className="bg-black bg-opacity-60 backdrop-blur-sm rounded-xl p-8 border border-white border-opacity-10">
+            {showThankYouMessage && (
+              <div className="mb-6 p-4 bg-green-600 text-white rounded-lg text-center">
+                <p className="font-semibold">Thank you! Your form has been submitted.</p>
+                <p className="text-sm mt-1">We'll respond within 24 hours.</p>
+              </div>
+            )}
+            
+            <h3 className="text-3xl font-heading font-bold text-white mb-4 text-center">
+              Get Your Free Bothwell Quote
+            </h3>
+            
+            <p className="text-gray-300 text-center mb-8">
+              Tell us about your Bothwell landscaping project
+            </p>
+            
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  className="w-full bg-white bg-opacity-10 border border-white border-opacity-20 rounded-lg px-4 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-primary-accent focus:bg-opacity-20 transition-all duration-200"
+                  placeholder="Your Name"
+                />
+              </div>
+
+              <div>
+                <input
+                  type="text"
+                  name="address"
+                  className="w-full bg-white bg-opacity-10 border border-white border-opacity-20 rounded-lg px-4 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-primary-accent focus:bg-opacity-20 transition-all duration-200"
+                  placeholder="Your Bothwell Address"
+                />
+              </div>
+
+              <div>
+                <input
+                  type="text"
+                  name="postcode"
+                  className="w-full bg-white bg-opacity-10 border border-white border-opacity-20 rounded-lg px-4 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-primary-accent focus:bg-opacity-20 transition-all duration-200"
+                  placeholder="Postcode"
+                />
+              </div>
+
+              <div>
+                <input
+                  type="tel"
+                  name="phone"
+                  required
+                  className="w-full bg-white bg-opacity-10 border border-white border-opacity-20 rounded-lg px-4 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-primary-accent focus:bg-opacity-20 transition-all duration-200"
+                  placeholder="Phone Number"
+                />
+              </div>
+
+              <div>
+                <textarea
+                  name="message"
+                  rows={4}
+                  className="w-full bg-white bg-opacity-10 border border-white border-opacity-20 rounded-lg px-4 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-primary-accent focus:bg-opacity-20 transition-all duration-200 resize-none"
+                  placeholder="Tell us about your Bothwell landscaping project..."
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-primary-accent hover:bg-hover-accent text-white font-bold py-4 px-6 rounded-lg transition-all duration-200 hover:scale-105 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? 'Submitting...' : 'Get My Free Bothwell Quote'}
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      {/* About Landscaping in Bothwell */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-secondary-bg">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="font-heading text-3xl sm:text-4xl font-bold text-text-primary mb-6">
+            Premium Landscaping Services in Bothwell
+          </h2>
+          <div className="space-y-6 text-lg sm:text-xl text-text-secondary leading-relaxed">
+            <p>
+              Bothwell's distinguished properties deserve landscaping that reflects the area's prestigious character and enhances long-term property value. Our team specializes in creating sophisticated outdoor spaces that complement Bothwell's architectural heritage while providing modern functionality for today's lifestyle.
+            </p>
+            <p>
+              From elegant garden design to premium composite materials, we understand what discerning Bothwell homeowners expect: exceptional quality, meticulous attention to detail, and results that stand the test of time.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us in Bothwell */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-text-primary mb-4">
+              Why Bothwell Homeowners Choose HSC Builders
+            </h2>
+            <p className="text-lg text-text-secondary max-w-3xl mx-auto">
+              Trusted expertise and premium results that match Bothwell's high standards for over 16 years.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {whyChooseUs.map((benefit, index) => (
+              <div key={index} className="bg-secondary-bg border border-border-color rounded-xl p-6 text-center hover:border-primary-accent/50 transition-all duration-300">
+                <div className="bg-primary-accent/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                  {benefit.icon}
+                </div>
+                <h3 className="font-heading text-lg font-bold text-text-primary mb-3">
+                  {benefit.title}
+                </h3>
+                <p className="text-text-secondary text-sm leading-relaxed">
+                  {benefit.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Recent Projects */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-secondary-bg">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-text-primary mb-4">
+              Recent Landscaping Projects
+            </h2>
+            <p className="text-lg text-text-secondary max-w-3xl mx-auto">
+              See how we've transformed outdoor spaces with professional landscaping, composite materials, and modern garden design.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {bothwellProjects.map((project, index) => (
+              <ProjectCard key={index} project={project} />
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Button
+              as="a"
+              href="#/gallery"
+              containerClassName="w-auto h-14"
+              className="px-8 py-3 font-semibold"
+            >
+              View All Our Projects
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-text-primary mb-4">
+              Landscaping FAQs for Bothwell Residents
+            </h2>
+            <p className="text-lg text-text-secondary">
+              Common questions about our premium landscaping services for Bothwell properties.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <div
+                key={index}
+                className="bg-secondary-bg rounded-xl border border-border-color overflow-hidden"
+              >
+                <button
+                  onClick={() => toggleFAQ(index)}
+                  className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-primary-bg/50 transition-colors duration-200 focus:outline-none focus:bg-primary-bg/50"
+                >
+                  <h3 className="text-lg font-heading font-semibold text-text-primary pr-4">
+                    {faq.question}
+                  </h3>
+                  <div className="flex-shrink-0">
+                    <ChevronDown 
+                      className={`w-5 h-5 text-primary-accent transition-transform duration-200 ${
+                        openFAQ === index ? 'rotate-180' : ''
+                      }`} 
+                    />
+                  </div>
+                </button>
+                
+                {openFAQ === index && (
+                  <div className="px-6 pb-4">
+                    <div className="border-t border-border-color pt-4">
+                      <p className="text-text-secondary leading-relaxed">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-primary-accent/10 to-hover-accent/10">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="bg-secondary-bg/80 backdrop-blur-sm border border-primary-accent/30 rounded-xl p-8 lg:p-12">
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-text-primary mb-6">
+              Transform Your Bothwell Garden Today
+            </h2>
+            <p className="text-xl text-text-secondary mb-8 max-w-2xl mx-auto">
+              Ready to create a distinguished outdoor space that enhances your Bothwell property? Get your free consultation today.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                as="a"
+                href="#/contact"
+                containerClassName="w-auto h-16"
+                className="px-8 py-4 text-lg font-bold"
+              >
+                Get Your Free Bothwell Quote
+              </Button>
+              <Button
+                as="a"
+                href="tel:+447490738974"
+                containerClassName="w-auto h-16"
+                className="px-8 py-4 text-lg font-bold"
+              >
+                <span className="flex items-center gap-2">
+                  Call Now <Phone className="w-5 h-5" />
+                </span>
+              </Button>
+              <Button
+                as="a"
+                href="https://wa.me/447490738974"
+                target="_blank"
+                rel="noopener noreferrer"
+                containerClassName="w-auto h-16"
+                className="px-8 py-4 text-lg font-bold"
+              >
+                <span className="flex items-center gap-2">
+                  WhatsApp <MessageCircle className="w-5 h-5" />
+                </span>
+              </Button>
+            </div>
+
+            <div className="mt-8 pt-6 border-t border-border-color">
+              <p className="text-text-secondary text-sm">
+                <strong className="text-primary-accent">Serving Bothwell:</strong> Premium landscaping services for South Lanarkshire's finest properties
+              </p>
+              <p className="text-text-secondary text-sm mt-2">
+                <strong className="text-primary-accent">Phone:</strong> 07490 738 974 | 
+                <strong className="text-primary-accent"> Email:</strong> hscbuildersglasgow@gmail.com
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* JSON-LD Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "HSC Builders - Landscaping Services Bothwell",
+            "description": "Premium landscaping services in Bothwell, South Lanarkshire. Sophisticated garden design, composite decking, and luxury outdoor living spaces.",
+            "url": "https://hscbuilders.co.uk/areas/bothwell-landscaping",
+            "telephone": "07490738974",
+            "email": "hscbuildersglasgow@gmail.com",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "10 Balmoral Gardens",
+              "addressLocality": "Blantyre",
+              "addressRegion": "South Lanarkshire",
+              "postalCode": "G72 9NP",
+              "addressCountry": "GB"
+            },
+            "areaServed": {
+              "@type": "Place",
+              "name": "Bothwell, South Lanarkshire"
+            },
+            "serviceType": "Premium Landscaping Services",
+            "priceRange": "£££",
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "5.0",
+              "reviewCount": "22"
+            }
+          })
+        }}
+      />
+    </div>
+  );
+};
+
+export default BothwellLandscaping;
