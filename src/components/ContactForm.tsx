@@ -11,7 +11,7 @@ interface ContactFormProps {
 const ContactForm: React.FC<ContactFormProps> = ({
   title = "Get In Touch",
   subtitle = "Ready to transform your outdoor space? Send us a message and we'll get back to you within 24 hours.",
-  formspreeId = "https://formspree.io/f/xldwqdrp",
+  formspreeId = "YOUR_FORM_ID",
   className = ''
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -37,7 +37,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
       {/* Form */}
       <form 
-        action="https://formspree.io/f/xvgqzbeo"
+        action="https://formspree.io/f/xldwqdrp"
         method="POST" 
         onSubmit={handleSubmit}
         className="space-y-6"
