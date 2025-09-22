@@ -11,7 +11,7 @@ interface ContactFormProps {
 const ContactForm: React.FC<ContactFormProps> = ({
   title = "Get In Touch",
   subtitle = "Ready to transform your outdoor space? Send us a message and we'll get back to you within 24 hours.",
-  formspreeId = "YOUR_FORM_ID",
+  formspreeId = "https://formspree.io/f/xldwqdrp",
   className = ''
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
