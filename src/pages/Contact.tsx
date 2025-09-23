@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Phone, Mail, MapPin, Clock, Shield, Award, Star, Send, MessageCircle } from 'lucide-react';
 import { Button } from '../components/MovingBorderButton';
 
