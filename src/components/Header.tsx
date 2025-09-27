@@ -212,89 +212,96 @@ const Header: React.FC = () => {
         </div>
 
         {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="lg:hidden border-t border-white border-opacity-20 bg-black">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              {navigationItems.map((item) => (
-              <div key={item.name}>
-                {item.hasDropdown ? (
-                  <div className="space-y-1">
-                    <div className="px-3 py-2 text-base font-medium text-white">
-                      {item.name}
-                    </div>
-                    {item.dropdownItems && item.dropdownItems.map((dropdownItem) => (
-                      <div key={dropdownItem.name} className="ml-3">
-                        <a
-                          href={dropdownItem.href}
-                          className="block px-3 py-2 text-sm font-medium text-white hover:text-primary-accent hover:bg-white hover:bg-opacity-10 rounded-lg transition-colors duration-200"
-                          onClick={() => {
-                            scrollToTop();
-                            setIsMenuOpen(false);
-                          }}
-                        >
-                          {dropdownItem.name}
-                        </a>
-                        {dropdownItem.hasSubDropdown && dropdownItem.subDropdownItems && (
-                          <div className="ml-4 mt-1 space-y-1">
-                            {dropdownItem.subDropdownItems.map((subItem) => (
-                              subItem.isHeader ? (
-                                <div key={subItem.name} className="px-3 py-1 text-primary-accent font-semibold text-xs uppercase tracking-wide">
-                                  {subItem.name}
-                                </div>
-                              ) : (
-                                <a
-                                  key={subItem.name}
-                                  href={subItem.href}
-                                  className="block px-3 py-1 text-xs font-medium text-gray-300 hover:text-primary-accent hover:bg-white hover:bg-opacity-10 rounded transition-colors duration-200"
-                                  onClick={() => {
-                                    scrollToTop();
-                                    setIsMenuOpen(false);
-                                  }}
-                                >
-                                  {subItem.name}
-                                </a>
-                              )
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    ))}
+{isMenuOpen && (
+  <div className="lg:hidden border-t border-white border-opacity-20 bg-black max-h-screen overflow-y-auto z-50">
+    <div className="px-2 pt-2 pb-3 space-y-1">
+      {navigationItems.map((item) => (
+        <div key={item.name}>
+          {item.hasDropdown ? (
+            <div className="space-y-1">
+              <div className="px-3 py-2 text-base font-medium text-white">
+                {item.name}
+              </div>
+              {item.dropdownItems &&
+                item.dropdownItems.map((dropdownItem) => (
+                  <div key={dropdownItem.name} className="ml-3">
+                    <a
+                      href={dropdownItem.href}
+                      className="block px-3 py-2 text-sm font-medium text-white hover:text-primary-accent hover:bg-white hover:bg-opacity-10 rounded-lg transition-colors duration-200"
+                      onClick={() => {
+                        scrollToTop();
+                        setIsMenuOpen(false);
+                      }}
+                    >
+                      {dropdownItem.name}
+                    </a>
+                    {dropdownItem.hasSubDropdown &&
+                      dropdownItem.subDropdownItems && (
+                        <div className="ml-4 mt-1 space-y-1">
+                          {dropdownItem.subDropdownItems.map((subItem) =>
+                            subItem.isHeader ? (
+                              <div
+                                key={subItem.name}
+                                className="px-3 py-1 text-primary-accent font-semibold text-xs uppercase tracking-wide"
+                              >
+                                {subItem.name}
+                              </div>
+                            ) : (
+                              <a
+                                key={subItem.name}
+                                href={subItem.href}
+                                className="block px-3 py-1 text-xs font-medium text-gray-300 hover:text-primary-accent hover:bg-white hover:bg-opacity-10 rounded transition-colors duration-200"
+                                onClick={() => {
+                                  scrollToTop();
+                                  setIsMenuOpen(false);
+                                }}
+                              >
+                                {subItem.name}
+                              </a>
+                            )
+                          )}
+                        </div>
+                      )}
                   </div>
-                ) : (
-                  <a
-                    href={item.href}
-                    className="block px-3 py-2 text-base font-medium text-white hover:text-primary-accent hover:bg-white hover:bg-opacity-10 rounded-lg transition-colors duration-200"
-                    onClick={() => {
-                      scrollToTop();
-                      setIsMenuOpen(false);
-                    }}
-                  >
-                    {item.name}
-                  </a>
-                )}
-              </div>
-            ))}
-              <div className="flex flex-col space-y-2 mt-4">
-                <a
-                  href="#quote-form"
-                  className="bg-primary-accent hover:bg-hover-accent text-white font-bold text-center py-3 rounded-lg transition-all duration-200"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Get Quote
-                </a>
-                <a
-                  href="https://wa.me/447490738974"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="border-2 border-white text-white hover:bg-white hover:text-black font-bold text-center py-3 rounded-lg transition-all duration-200"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  WhatsApp
-                </a>
-              </div>
+                ))}
             </div>
-          </div>
-        )}
+          ) : (
+            <a
+              href={item.href}
+              className="block px-3 py-2 text-base font-medium text-white hover:text-primary-accent hover:bg-white hover:bg-opacity-10 rounded-lg transition-colors duration-200"
+              onClick={() => {
+                scrollToTop();
+                setIsMenuOpen(false);
+              }}
+            >
+              {item.name}
+            </a>
+          )}
+        </div>
+      ))}
+
+      {/* Action Buttons */}
+      <div className="flex flex-col space-y-2 mt-4">
+        <a
+          href="#quote-form"
+          className="bg-primary-accent hover:bg-hover-accent text-white font-bold text-center py-3 rounded-lg transition-all duration-200"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Get Quote
+        </a>
+        <a
+          href="https://wa.me/447490738974"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="border-2 border-white text-white hover:bg-white hover:text-black font-bold text-center py-3 rounded-lg transition-all duration-200"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+)}
       </div>
     </header>
   );
