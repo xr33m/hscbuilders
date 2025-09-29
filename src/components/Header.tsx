@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Menu, X, Triangle } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [activeSubDropdown, setActiveSubDropdown] = useState<string | null>(null);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -18,57 +17,12 @@ const Header: React.FC = () => {
       href: '#', 
       hasDropdown: true, 
       dropdownItems: [
-        { 
-          name: 'Landscaping', 
-          href: '#/services/landscaping',
-          hasSubDropdown: true,
-          subDropdownItems: [
-            { name: 'Areas', isHeader: true },
-            { name: 'Jackton', href: '#/areas/jackton-landscaping' },
-            { name: 'Bothwell', href: '#/areas/bothwell-landscaping' },
-            { name: 'Hamilton', href: '#/areas/hamilton-landscaping' },
-            { name: 'Newton Farm', href: '#/areas/newton-farm-landscaping' },
-          ]
-        },
-        { 
-          name: 'Hardscaping', 
-          href: '#/services/hardscaping',
-          hasSubDropdown: true,
-          subDropdownItems: [
-            { name: 'Areas', isHeader: true },
-            { name: 'Jackton', href: '#/areas/jackton-driveways' },
-            { name: 'Bothwell', href: '#/areas/bothwell-hardscaping' },
-            { name: 'Hamilton', href: '#/areas/hamilton-hardscaping' },
-            { name: 'Newton Farm', href: '#/areas/newton-farm-hardscaping' },
-          ]
-        },
-        { 
-          name: 'Groundskeeping', 
-          href: '#/services/groundskeeping',
-          hasSubDropdown: true,
-          subDropdownItems: [
-            { name: 'Areas', isHeader: true },
-            { name: 'Jackton', href: '#/areas/jackton-groundskeeping' },
-            { name: 'Bothwell', href: '#/areas/bothwell-groundskeeping' },
-            { name: 'Hamilton', href: '#/areas/hamilton-groundskeeping' },
-            { name: 'Newton Farm', href: '#/areas/newton-farm-groundskeeping' },
-          ]
-        },
-        { 
-          name: 'Masonry & Brickwork', 
-          href: '#/services/masonry-brickwork',
-          hasSubDropdown: true,
-          subDropdownItems: [
-            { name: 'Areas', isHeader: true },
-            { name: 'Jackton', href: '#/areas/jackton-masonry' },
-            { name: 'Bothwell', href: '#/areas/bothwell-masonry' },
-            { name: 'Hamilton', href: '#/areas/hamilton-masonry' },
-            { name: 'Newton Farm', href: '#/areas/newton-farm-masonry' },
-          ]
-        },
+        { name: 'Landscaping', href: '#/services/landscaping' },
+        { name: 'Hardscaping', href: '#/services/hardscaping' },
+        { name: 'Groundskeeping', href: '#/services/groundskeeping' },
+        { name: 'Masonry & Brickwork', href: '#/services/masonry-brickwork' },
       ]
     },
-    { name: 'Areas', href: '#/areas' },
     { name: 'Gallery', href: '#/gallery' },
     { name: 'Reviews', href: '#/reviews' },
     { name: 'FAQ', href: '#/faq' },
@@ -77,17 +31,12 @@ const Header: React.FC = () => {
 
   const handleMouseEnter = (itemName: string) => {
     setActiveDropdown(itemName);
-    setActiveSubDropdown(null);
   };
 
   const handleMouseLeave = () => {
     setActiveDropdown(null);
-    setActiveSubDropdown(null);
   };
 
-  const handleSubDropdownEnter = (subItemName: string) => {
-    setActiveSubDropdown(subItemName);
-  };
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-sm border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -132,48 +81,14 @@ const Header: React.FC = () => {
                   <div className="absolute top-full left-0 mt-2 w-64 bg-black/95 backdrop-blur-sm border border-white/10 rounded-lg shadow-xl transition-all duration-200 z-50">
                     <div className="py-2">
                       {item.dropdownItems.map((dropdownItem) => (
-                        <div
+                        <a
                           key={dropdownItem.name}
-                          className="relative"
-                          onMouseEnter={() => dropdownItem.hasSubDropdown && handleSubDropdownEnter(dropdownItem.name)}
+                          href={dropdownItem.href}
+                          onClick={scrollToTop}
+                          className="block px-4 py-3 text-white hover:text-primary-accent hover:bg-white/5 transition-colors duration-200 text-sm"
                         >
-                          <a
-                            href={dropdownItem.href}
-                            onClick={scrollToTop}
-                            className="block px-4 py-3 text-white hover:text-primary-accent hover:bg-white/5 transition-colors duration-200 text-sm flex items-center justify-between"
-                          >
-                            {dropdownItem.name}
-                            {dropdownItem.hasSubDropdown && (
-                              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                              </svg>
-                            )}
-                          </a>
-                          
-                          {/* Sub-dropdown for Areas */}
-                          {dropdownItem.hasSubDropdown && dropdownItem.subDropdownItems && activeSubDropdown === dropdownItem.name && (
-                            <div className="absolute top-0 left-full ml-1 w-48 bg-black/95 backdrop-blur-sm border border-white/10 rounded-lg shadow-xl z-50">
-                              <div className="py-2">
-                                {dropdownItem.subDropdownItems.map((subItem) => (
-                                  subItem.isHeader ? (
-                                    <div key={subItem.name} className="px-4 py-2 text-primary-accent font-semibold text-xs uppercase tracking-wide border-b border-white/10">
-                                      {subItem.name}
-                                    </div>
-                                  ) : (
-                                    <a
-                                      key={subItem.name}
-                                      href={subItem.href}
-                                      onClick={scrollToTop}
-                                      className="block px-4 py-2 text-white hover:text-primary-accent hover:bg-white/5 transition-colors duration-200 text-sm"
-                                    >
-                                      {subItem.name}
-                                    </a>
-                                  )
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                        </div>
+                          {dropdownItem.name}
+                        </a>
                       ))}
                     </div>
                   </div>
@@ -212,96 +127,68 @@ const Header: React.FC = () => {
         </div>
 
         {/* Mobile Navigation */}
-{isMenuOpen && (
-  <div className="lg:hidden border-t border-white border-opacity-20 bg-black max-h-screen overflow-y-auto z-50">
-    <div className="px-2 pt-2 pb-3 space-y-1">
-      {navigationItems.map((item) => (
-        <div key={item.name}>
-          {item.hasDropdown ? (
-            <div className="space-y-1">
-              <div className="px-3 py-2 text-base font-medium text-white">
-                {item.name}
-              </div>
-              {item.dropdownItems &&
-                item.dropdownItems.map((dropdownItem) => (
-                  <div key={dropdownItem.name} className="ml-3">
+        {isMenuOpen && (
+          <div className="lg:hidden border-t border-white border-opacity-20 bg-black max-h-screen overflow-y-auto z-50">
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              {navigationItems.map((item) => (
+                <div key={item.name}>
+                  {item.hasDropdown ? (
+                    <div className="space-y-1">
+                      <div className="px-3 py-2 text-base font-medium text-white">
+                        {item.name}
+                      </div>
+                      {item.dropdownItems &&
+                        item.dropdownItems.map((dropdownItem) => (
+                          <a
+                            key={dropdownItem.name}
+                            href={dropdownItem.href}
+                            className="block px-3 py-2 text-sm font-medium text-white hover:text-primary-accent hover:bg-white hover:bg-opacity-10 rounded-lg transition-colors duration-200"
+                            onClick={() => {
+                              scrollToTop();
+                              setIsMenuOpen(false);
+                            }}
+                          >
+                            {dropdownItem.name}
+                          </a>
+                        ))}
+                    </div>
+                  ) : (
                     <a
-                      href={dropdownItem.href}
-                      className="block px-3 py-2 text-sm font-medium text-white hover:text-primary-accent hover:bg-white hover:bg-opacity-10 rounded-lg transition-colors duration-200"
+                      href={item.href}
+                      className="block px-3 py-2 text-base font-medium text-white hover:text-primary-accent hover:bg-white hover:bg-opacity-10 rounded-lg transition-colors duration-200"
                       onClick={() => {
                         scrollToTop();
                         setIsMenuOpen(false);
                       }}
                     >
-                      {dropdownItem.name}
+                      {item.name}
                     </a>
-                    {dropdownItem.hasSubDropdown &&
-                      dropdownItem.subDropdownItems && (
-                        <div className="ml-4 mt-1 space-y-1">
-                          {dropdownItem.subDropdownItems.map((subItem) =>
-                            subItem.isHeader ? (
-                              <div
-                                key={subItem.name}
-                                className="px-3 py-1 text-primary-accent font-semibold text-xs uppercase tracking-wide"
-                              >
-                                {subItem.name}
-                              </div>
-                            ) : (
-                              <a
-                                key={subItem.name}
-                                href={subItem.href}
-                                className="block px-3 py-1 text-xs font-medium text-gray-300 hover:text-primary-accent hover:bg-white hover:bg-opacity-10 rounded transition-colors duration-200"
-                                onClick={() => {
-                                  scrollToTop();
-                                  setIsMenuOpen(false);
-                                }}
-                              >
-                                {subItem.name}
-                              </a>
-                            )
-                          )}
-                        </div>
-                      )}
-                  </div>
-                ))}
-            </div>
-          ) : (
-            <a
-              href={item.href}
-              className="block px-3 py-2 text-base font-medium text-white hover:text-primary-accent hover:bg-white hover:bg-opacity-10 rounded-lg transition-colors duration-200"
-              onClick={() => {
-                scrollToTop();
-                setIsMenuOpen(false);
-              }}
-            >
-              {item.name}
-            </a>
-          )}
-        </div>
-      ))}
+                  )}
+                </div>
+              ))}
 
-      {/* Action Buttons */}
-      <div className="flex flex-col space-y-2 mt-4">
-        <a
-          href="#quote-form"
-          className="bg-primary-accent hover:bg-hover-accent text-white font-bold text-center py-3 rounded-lg transition-all duration-200"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Get Quote
-        </a>
-        <a
-          href="https://wa.me/447490738974"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="border-2 border-white text-white hover:bg-white hover:text-black font-bold text-center py-3 rounded-lg transition-all duration-200"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          WhatsApp
-        </a>
-      </div>
-    </div>
-  </div>
-)}
+              {/* Action Buttons */}
+              <div className="flex flex-col space-y-2 mt-4">
+                <a
+                  href="#quote-form"
+                  className="bg-primary-accent hover:bg-hover-accent text-white font-bold text-center py-3 rounded-lg transition-all duration-200"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Get Quote
+                </a>
+                <a
+                  href="https://wa.me/447490738974"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border-2 border-white text-white hover:bg-white hover:text-black font-bold text-center py-3 rounded-lg transition-all duration-200"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );
