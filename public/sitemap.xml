@@ -11,11 +11,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://hscbuilders.co.uk/#/areas</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://hscbuilders.co.uk/#/services/landscaping</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -36,9 +31,9 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://hscbuilders.co.uk/#/contact</loc>
+    <loc>https://hscbuilders.co.uk/#/gallery</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://hscbuilders.co.uk/#/reviews</loc>
@@ -51,97 +46,17 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://hscbuilders.co.uk/#/gallery</loc>
+    <loc>https://hscbuilders.co.uk/#/contact</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://hscbuilders.co.uk/#/areas/jackton-landscaping</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hscbuilders.co.uk/#/areas/bothwell-landscaping</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hscbuilders.co.uk/#/areas/hamilton-landscaping</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hscbuilders.co.uk/#/areas/newton-farm-landscaping</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hscbuilders.co.uk/#/areas/jackton-driveways</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hscbuilders.co.uk/#/areas/bothwell-hardscaping</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hscbuilders.co.uk/#/areas/hamilton-hardscaping</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hscbuilders.co.uk/#/areas/newton-farm-hardscaping</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hscbuilders.co.uk/#/areas/jackton-groundskeeping</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hscbuilders.co.uk/#/areas/bothwell-groundskeeping</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hscbuilders.co.uk/#/areas/hamilton-groundskeeping</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hscbuilders.co.uk/#/areas/newton-farm-groundskeeping</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hscbuilders.co.uk/#/areas/jackton-masonry</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hscbuilders.co.uk/#/areas/bothwell-masonry</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hscbuilders.co.uk/#/areas/hamilton-masonry</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hscbuilders.co.uk/#/areas/newton-farm-masonry</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hscbuilders.co.uk/terms</loc>
+    <loc>https://hscbuilders.co.uk/privacy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://hscbuilders.co.uk/privacy</loc>
+    <loc>https://hscbuilders.co.uk/terms</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
